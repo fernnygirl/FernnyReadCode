@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fernny Read Code</string>
+    <string name="Login_th">ลงชื่อเข้าใช้งาน</string>
+    <string name="register">สมัครใช้งาน</string>
+</resources>
