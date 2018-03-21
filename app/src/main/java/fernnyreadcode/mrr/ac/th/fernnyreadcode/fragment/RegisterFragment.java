@@ -7,9 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import fernnyreadcode.mrr.ac.th.fernnyreadcode.MainActivity;
 import fernnyreadcode.mrr.ac.th.fernnyreadcode.R;
+import fernnyreadcode.mrr.ac.th.fernnyreadcode.utility.MyAlert;
 
 /**
  * Created by Teacher on 21 มีนาคม 2561.
@@ -17,16 +20,65 @@ import fernnyreadcode.mrr.ac.th.fernnyreadcode.R;
 
 public class RegisterFragment extends Fragment{
 
+//    Exlicit
+    private String nameString, userString, passwordString;
+
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
 //        Create Toolbar
+        createToolbar();
+
+//            Register Controller
+        registerController();
+
+
+    }   // Main Method
+
+    private void registerController() {
+        Button button = getView().findViewById(R.id.btnRegister);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                Get Value From EditText
+                EditText nameEditText = getView().findViewById(R.id.edtname);
+                EditText userEditText = getView().findViewById(R.id.edtUser);
+                EditText passwordEditText = getView().findViewById(R.id.edtPassword);
+
+//                Change EditText To String
+
+                nameString = nameEditText.getText().toString().trim();
+                userString = userEditText.getText().toString().trim();
+                passwordString = passwordEditText.getText().toString().trim();
+
+//                Check Space
+
+                if (nameString.isEmpty() || userString.isEmpty() || passwordString.isEmpty()) {
+//                    Have Space
+
+                    MyAlert myAlert = new MyAlert(getActivity());
+                    myAlert.myDialog("Have Space", "Please Fill All Blank");
+
+                } else {
+//                    No Space
+
+
+                }
+
+            }
+        });
+
+    }
+
+    private void createToolbar() {
         Toolbar toolbar = getView().findViewById(R.id.toolbarRegister);
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
 
 //        Setup Title
-            ((MainActivity) getActivity()).getSupportActionBar().setTitle("Register");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Register");
 
 //            Show Navigator Icon
 
@@ -39,11 +91,7 @@ public class RegisterFragment extends Fragment{
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
-
-
-
-
-    }   // Main Method
+    }
 
     @Nullable
     @Override
